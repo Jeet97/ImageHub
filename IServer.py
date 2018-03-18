@@ -14,18 +14,16 @@ from config import myapp,exts,ip,UPLOAD_FOLDER,USER_FOLDER
 
 
 
+def getsession(path):
+    engine = create_engine(path)
+    base.metadata.bind = engine
+    dbsession = sessionmaker(engine)
+    return desession()
+    
 
 
-
-engine = create_engine(r'sqlite:///users.db')
-base.metadata.bind = engine
-dbsession = sessionmaker(engine)
-session = dbsession()
-
-engine = create_engine(r'sqlite:///picdata.db')
-picbase.metadata.bind = engine
-dbsession = sessionmaker(engine)
-picsession = dbsession()
+session = getsession(r'sqlite:///userdata.db')
+picsession = getsession(r'sqlite:///picdata.db')
 
 
 def allowed_file(filename):
@@ -188,5 +186,5 @@ def login():
 
 
 if __name__ == '__main__':
-    myapp.run(host = '0.0.0.0',port = 2222,debug = True)
+    myapp.run(host = '0.0.0.0',port = 2222,debug = True)  #You can choose any valid port no. and host address.
     
