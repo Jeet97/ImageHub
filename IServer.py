@@ -1,28 +1,21 @@
 import os
 import json
-from flask import Flask, request,url_for,redirect,flash,send_from_directory,render_template,abort,Response,jsonify,g
-from createusertable import User,base
-from createpictable import pics,picbase
+from flask import  request,url_for,redirect,flash,send_from_directory,render_template,abort,Response,jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from functools import wraps
-from flask_httpauth import HTTPBasicAuth
+
+#files imported
+from createusertable import User,base
+from createpictable import pics,picbase
+from config import myapp,exts,ip,UPLOAD_FOLDER,USER_FOLDER
 
 
 
 
 
-exts = set(['jpg','png','jpeg','gif'])  # Supported Formats....Also supports .txt or .pdf formats
-ip = "YOUR MACHINE's IP Address"
-
-
-UPLOAD_FOLDER = 'UPLOAD FOLDER ADDRESS HERE' #Upload folder is in same directory as IServer.py
-USER_FOLDER = 'UPLOAD FOLDER ADDRESS HERE' #Upload folder is in same directory as IServer.py
-myapp = Flask(__name__)
-myapp.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-myapp.secret_key = 'abcxyz123'
 
 engine = create_engine(r'sqlite:///users.db')
 base.metadata.bind = engine
@@ -33,8 +26,6 @@ engine = create_engine(r'sqlite:///picdata.db')
 picbase.metadata.bind = engine
 dbsession = sessionmaker(engine)
 picsession = dbsession()
-
-auth = HTTPBasicAuth()
 
 
 def allowed_file(filename):
