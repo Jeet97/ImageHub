@@ -35,12 +35,12 @@ def upload_file(request):
         
         if request.method == 'POST':
             if 'user_image' not in request.files:
-                return 'no file'
+                return 'No file found'
 
             file = request.files['user_image']
 
             if file.filename == '':
-                return 'empty filename'
+                return 'Filename is empty'
 
             if file and allowed_file(file.filename):
                 filename = secure_filename(request.form['username']+'.jpg')
@@ -48,19 +48,19 @@ def upload_file(request):
                 
                 return ip+url_for('display_userpics',filename = filename)
     except Exception as e:
-        return e
+        return 'Exception Occured!!!'
 
 @myapp.route('/upload_pic',methods = ['POST'])
 def upload_pics():
     try:
         
             if 'post_pic' not in request.files:
-                return 'no file'
+                return 'No File Found'
 
             file = request.files['post_pic']
 
             if file.filename == '':
-                return 'empty filename'
+                return 'Filename is empty'
 
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
@@ -75,7 +75,7 @@ def upload_pics():
                 picsession.commit()
                 return 'Uploaded Successfully'
     except Exception as e:
-        return 'Exception'
+        return 'Exception Occured!!!'
 
 
 @myapp.route('/uploads/<filename>')
@@ -178,7 +178,7 @@ def login():
         
         return token
     else:
-        return "Not Found"
+        return "Account not found!!"
         
     
     
