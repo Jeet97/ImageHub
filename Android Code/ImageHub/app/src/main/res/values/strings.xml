@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ImageHub</string>
+    <string name="ip">http://192.168.43.126:2222</string>
+
+</resources>
