@@ -1,2 +1,4 @@
 # ImageHub
-Flask server  application for generating api's for image hosting and sharing that can be used by any android app.
+A Full Stack Android Social Media Application for image sharing and hosting like instagram,facebook etc.You can send images with cool captions and see images shared by your friends.
+
+
