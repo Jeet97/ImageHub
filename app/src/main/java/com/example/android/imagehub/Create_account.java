@@ -25,6 +25,8 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.path;
+
 public class Create_account extends AppCompatActivity implements onasynccomplete {
 
    private  EditText name,pass,ea,ph;
@@ -55,7 +57,7 @@ public class Create_account extends AppCompatActivity implements onasynccomplete
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+imageupload = true;
                 Intent in = new Intent();
 
                 in.setType("image/*");
@@ -78,9 +80,12 @@ public class Create_account extends AppCompatActivity implements onasynccomplete
                 else
                 {
 
-                    compressImage ci = new compressImage(Create_account.this);
-                    String path = ci.compressImage(selectedImagePath);
+                    String path;
+                    if (imageupload) {
 
+                        compressImage ci = new compressImage(Create_account.this);
+                         path = ci.compressImage(selectedImagePath);
+                    }
 
                     List<NameValuePair> lst = new ArrayList<NameValuePair>();
                     lst.add(new BasicNameValuePair("username",username));
